@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAIKAT</title>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#07070d;
+--cyan:#00f7ff;
+--purple:#b300ff;
+--text:#e8e8e8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+.logo{
+    width:min(90vw, 700px);
+    display:block;
+
+    filter:
+        drop-shadow(0 0 8px #00ffff)
+        drop-shadow(0 0 20px #00ffff)
+        drop-shadow(0 0 40px #ffe600);
+
+    animation:
+        logoFlicker 4s infinite,
+        logoGlitch 6s infinite;
+}
+@keyframes logoFlicker{
+
+    0%,95%,100%{
+        opacity:1;
+    }
+
+    96%{
+        opacity:.4;
+    }
+
+    97%{
+        opacity:1;
+    }
+
+    98%{
+        opacity:.15;
+    }
+
+    99%{
+        opacity:1;
+    }
+}
+.logo{
+    margin:3 auto;
+}
+
+@keyframes logoGlitch{
+
+    0%,90%,100%{
+        transform:translate(0);
+    }
+
+    91%{
+        transform:translate(-3px,0);
+    }
+
+    92%{
+        transform:translate(3px,0);
+    }
+
+    93%{
+        transform:translate(-2px,1px);
+    }
+
+    94%{
+        transform:translate(2px,-1px);
+    }
+}
+.grid{
+    position:fixed;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(0,255,255,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,.12) 1px, transparent 1px);
+    background-size:50px 50px;
+    z-index:-2;
+}
+.grid::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at center,
+        transparent 0%,
+        rgba(0,0,0,.3) 60%,
+        rgba(0,0,0,.85) 100%);
+}
+.scanlines{
+position:fixed;
+inset:0;
+pointer-events:none;
+background:repeating-linear-gradient(
+to bottom,
+transparent 0px,
+rgba(255,255,255,.03) 1px,
+transparent 2px
+);
+z-index:100;
+}
+.container{max-width:1000px;margin:auto;padding:40px 20px}
+.hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center}
+.glitch{
+    font-family:'Teko', sans-serif;
+    font-size:clamp(5rem,12vw,10rem);
+    font-weight:700;
+
+    position:relative;
+    display:inline-block;
+
+    transform:skew(-15deg);
+
+    text-transform:uppercase;
+    letter-spacing:2px;
+
+    background:linear-gradient(
+        180deg,
+        #fff94d 0%,
+        #ffe600 35%,
+        #c9ff00 100%
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    text-shadow:
+        0 0 10px rgba(255,230,0,.5),
+        0 0 25px rgba(166,255,0,.4);
+
+    animation:
+        logoFlicker 4s infinite,
+        logoJitter 6s infinite;
+}
+.glitch::before,
+.glitch::after{
+    content:attr(data-text);
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.glitch::before{
+    color:#00ffff;
+    z-index:-1;
+    opacity:.7;
+    animation:glitchBlue 2s infinite;
+}
+
+.glitch::after{
+    color:#ff00ff;
+    z-index:-2;
+    opacity:.4;
+    animation:glitchPink 2s infinite;
+}
+.tag{
+margin-top:10px;
+font-size:1.2rem;
+color:#bfbfbf;
+}
+.bio{
+margin-top:20px;
+max-width:600px;
+line-height:1.7;
+}
+.links{
+margin-top:30px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+.btn{
+text-decoration:none;
+color:white;
+padding:12px 18px;
+border:1px solid var(--cyan);
+border-radius:10px;
+box-shadow:0 0 15px rgba(0,247,255,.3);
+transition:.25s;
+}
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 25px rgba(0,247,255,.8);
+}
+section{
+margin:80px 0;
+padding:25px;
+border:1px solid rgba(255,255,255,.12);
+border-radius:16px;
+background:rgba(255,255,255,.03);
+backdrop-filter:blur(4px);
+}
+h2{
+margin-bottom:20px;
+color:var(--cyan);
+text-shadow:0 0 10px var(--cyan);
+}
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+.tagbox{
+padding:10px 14px;
+border:1px solid var(--purple);
+border-radius:999px;
+}
+.footer{
+text-align:center;
+padding:40px;
+color:#888;
+}
+.spotify-card{
+    border:1px solid #00f7ff;
+    box-shadow:0 0 25px rgba(0,247,255,.25);
+}
+@keyframes glitchBlue{
+
+    0%,100%{
+        transform:translate(0);
+        clip-path:inset(0 0 0 0);
+    }
+
+    20%{
+        transform:translate(-4px,2px);
+        clip-path:inset(20% 0 40% 0);
+    }
+
+    40%{
+        transform:translate(4px,-2px);
+        clip-path:inset(60% 0 5% 0);
+    }
+
+    60%{
+        transform:translate(-2px,1px);
+        clip-path:inset(10% 0 70% 0);
+    }
+
+    80%{
+        transform:translate(3px,-1px);
+        clip-path:inset(75% 0 10% 0);
+    }
+}
+
+@keyframes glitchPink{
+
+    0%,100%{
+        transform:translate(0);
+    }
+
+    25%{
+        transform:translate(4px,-2px);
+    }
+
+    50%{
+        transform:translate(-4px,2px);
+    }
+
+    75%{
+        transform:translate(2px,-1px);
+    }
+}
+
+@keyframes logoFlicker{
+
+    0%,95%,100%{
+        opacity:1;
+    }
+
+    96%{
+        opacity:.3;
+    }
+
+    97%{
+        opacity:1;
+    }
+
+    98%{
+        opacity:.1;
+    }
+
+    99%{
+        opacity:1;
+    }
+}
+
+@keyframes logoJitter{
+
+    0%,90%,100%{
+        transform:skew(-15deg);
+    }
+
+    91%{
+        transform:skew(-15deg) translateX(-2px);
+    }
+
+    92%{
+        transform:skew(-15deg) translateX(2px);
+    }
+
+    93%{
+        transform:skew(-15deg) translateX(-1px);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+<div class="scanlines"></div>
+
+<div class="container">
+<div class="netrunner">
+<img src="preview.png" alt="SAIKAT" class="logo">
+<p class="tag">Student  |  Kolkata </p>
+<p class="bio">
+Lost somewhere between reality and fiction.
+</p>
+<section class="spotify-card">
+    <h2>NOW TRANSMITTING</h2>
+
+   <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4hCmbI4UfMg8iQpRWQKPRI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</section>
+
+<div class="links">
+<a class="btn" href="https://instagram.com/saikat.mp3" target="_blank">Instagram</a>
+<a class="btn" href="https://open.spotify.com/user/31hg4xywlsf2iiua5fslt22mvnhq" target="_blank">Spotify</a>
+<a class="btn" href="https://letterboxd.com/saikatnothere/" target="_blank">Letterboxd</a>
+</div>
+</div>
+<br></br>
+<br></br>
+<h2>MY TOP 5s 👇</h2>
+
+<section>
+<h2>ANIME</h2>
+<div class="tags">
+<span class="tagbox">Attack on Titan</span>
+<span class="tagbox">Death Note</span>
+<span class="tagbox">Vinland Saga</span>
+<span class="tagbox">Code Geass</span>
+<span class="tagbox">Steins;Gate</span>
+</div>
+</section>
+
+<section>
+<h2>MUSIC</h2>
+<div class="tags">
+<span class="tagbox">Kanye West</span>
+<span class="tagbox">Playboi Carti</span>
+<span class="tagbox">Joji</span>
+<span class="tagbox">Mac Demarco</span>
+<span class="tagbox">Nirvana</span>
+</div>
+</section>
+
+<section>
+<h2>TV</h2>
+<div class="tags">
+<span class="tagbox">Breaking Bad</span>
+<span class="tagbox">Better Call Saul</span>
+<span class="tagbox">Game of Thrones</span>
+<span class="tagbox">Prison Break</span>
+<span class="tagbox">The Walking Dead</span>
+</div>
+</section>
+
+<section>
+<h2>STATUS</h2>
+<p>> Currently surviving.</p>
+<p>> Exploring new things.</p>
+<p>> Online somewhere.</p>
+</section>
+
+<div class="footer">
+SAIKAT // CYBERSPACE NODE
+</div>
+</div>
+</body>
+</html>
